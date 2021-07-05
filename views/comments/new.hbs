@@ -1,0 +1,37 @@
+<div class='container'>
+  <div class='card'>
+    <div class='card-header'>
+      {{#if ideaDoc.title}}
+        <h4>Add Comment {{ideaDoc.title}}</h4>
+      {{else}}
+        <h4>Add Comment {{idea.title}}</h4>
+      {{/if}}
+    </div>
+    <div class='card-body'>
+      <form action='/ideas/{{idea._id}}/comments' method='POST'>
+        <div class='form-group'>
+          <input
+            type='text'
+            name='title'
+            class='form-control'
+            placeholder='Title of your comment'
+            {{#if comTitle}} value={{comTitle}}{{/if}}
+          />
+        </div>
+        <div class='form-group'>
+          <textarea
+            name='text'
+            class='form-control mt-2'
+            placeholder='comments...'
+          > {{#if comText}}{{comText}}{{/if}}</textarea>
+        </div>
+        <input type='submit' class='btn btn-primary mt-2' value='Add Comment' />
+      </form>
+      {{#if ideaDoc.id}}
+      <a href='/ideas/{{ideaDoc.id}}' class='btn btn-info mt-2'>Back to Idea</a>
+      {{else}}
+      <a href='/ideas/{{idea.id}}' class='btn btn-info mt-2'>Back to Idea</a>
+      {{/if}}
+    </div>
+  </div>
+</div>

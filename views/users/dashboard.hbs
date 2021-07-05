@@ -1,0 +1,35 @@
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xm-6 px-3 py-3">
+                {{>_dashboard-panel-left}}
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xm-6 px-3 py-3">
+              <table class="table table-striped table-hover text-center">
+                <thead>
+                    <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                    {{#each ideas}}
+                        <tr>
+                            <td><a href="/ideas/{{_id}}">{{title}}</a></td>
+                            <td>{{formatDate createdAt 'dd/MM/yy'}}</td>
+                            <td>{{status}}</td>
+                            <td><a href="/ideas/{{_id}}/edit"><i class="fas fa-pen"></i></a></td>
+                            <form action="/ideas/{{_id}}?_method=DELETE" method="POST">
+                                <td><button class="btn"><i class="fas fa-trash-alt"></i></button></td>
+                            </form>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    
+</div>

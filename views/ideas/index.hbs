@@ -1,0 +1,43 @@
+{{#if userRef}}
+  <h3 class='text-center'>All Ideas by <strong>{{firstName}}</strong></h3>
+  {{#each ideas}}
+    <div class='container'>
+      <div class='card'>
+        <div class='card-body'>
+          <h5 class='card-title'>{{title}}</h5>
+          <div class='card-text'>{{{truncateContent description 50}}}</div>
+          <div class='mt-2 mb-2'>
+            <em> <small class='text-muted'> Tags: </small></em>
+            {{#each tags}}
+              <span class='badge bg-info'>{{this}}</span>
+            {{/each}}
+          </div>
+          <a href='/ideas/{{_id}}' class='btn btn-sm btn-primary'>Read More</a>
+        </div>
+      </div>
+
+    </div>
+
+  {{/each}}
+
+{{else}}
+  {{#each ideas}}
+    <div class='container'>
+      <div class='card'>
+        <div class='card-body'>
+          <h5 class='card-title'>{{title}}</h5>
+          <div class='card-text'>{{{truncateContent description 50}}}</div>
+          <div class='mt-2 mb-2'>
+            <em> <small class='text-muted'> Tags: </small></em>
+            {{#each tags}}
+              <span class='badge bg-info'>{{this}}</span>
+            {{/each}}
+          </div>
+          <a href='/ideas/{{_id}}' class='btn btn-sm btn-primary'>Read More</a>
+        </div>
+      </div>
+
+    </div>
+
+  {{/each}}
+{{/if}}

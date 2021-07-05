@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="card p-4 mt-2">
+    <div class="card-body">
+      <h5 class="card-title">{{idea.title}}</h5>
+      <div class="card-text">{{{idea.description}}}</div>
+        <div class="mt-2 mb-2 d-flex justify-content-between">
+          <div>
+            <em> <small class='text-muted'> Tags: </small></em>
+            {{#each idea.tags}}
+              <span class="badge bg-info">{{this}}</span> 
+            {{/each}}
+          </div>
+
+          <div>
+            <span >Arthur: <strong><a href="/users/{{idea.user.id}}/ideas">{{checkArthur idea.user.id user_id idea.user.firstName idea.user.lastName}}</a></strong></span>
+            <p class="text-muted">Date: {{formatDate idea.createdAt 'dd/MM/yy'}}</p>
+          </div>
+        </div>
+
+          {{#if user}}
+        <div style="display:{{compareValues idea.user.id user_id 'btn'}};">
+          <div class="d-flex justify-content-start">
+            <a href="/ideas/{{idea._id}}/edit" class= "btn btn-primary btn-sm">Edit Idea</a>
+            <form action="/ideas/{{idea._id}}?_method=DELETE" method='POST'>
+              <button class= "btn btn-danger btn-sm mx-2">Delete Idea</button>
+              </form>
+          </div>
+        </div>
+          {{else}}
+          {{/if}}
+    </div>
+  </div>
+    {{#if user}}
+      {{#if idea.allowComments}}
+        <div class="card p-2">
+            <a href="/ideas/{{idea._id}}/comments/new" class="btn btn-info">Add Comment</a>
+          <div class="card-body">
+            {{#each idea.comments}}
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h5 class="card-title">
+                    {{title}}
+                  </h5>
+                  <p class="card-text">{{text}}</p>
+                  <div style="display: {{compareValues user.id ../user_id 'btn'}};">
+                    <form action="/ideas/{{../idea._id}}/comments/{{_id}}?_method=DELETE" method="POST">
+                      <button class= "btn btn-danger btn-sm">Delete</button>
+                    </form>
+                  </div>
+                </div>
+                <div>
+                  <em class="text-muted">~{{user.firstName}} {{user.lastName}}</em>
+                  <p>{{formatDate createdAt 'dd/MM/yy'}}</p>
+                </div>
+              </div>
+              <hr>
+            {{else}}
+              <p class="card-text">No comments available</p>
+            {{/each}}
+          </div>
+        </div>
+
+        {{else}}
+          <h5 class="text-muted text-center mt-2">Comment is off by Arthur</h5>
+          
+      {{/if}}
+    
+    {{else}}
+      <h5 class="text-muted text-center mt-2">Please <a href="/auth/login">login</a> to add or view comment</h5>
+    {{/if}}
+
+</div>

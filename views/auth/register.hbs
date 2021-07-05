@@ -1,0 +1,60 @@
+<div class='row'>
+  <div class='col-lg-8 col-lg-6 col-sm-12 offset-lg-2'>
+    <h1 class='text-muted pb-3'>Register</h1>
+    <form action='/auth/register' method='POST'>
+      <div class='row'>
+        <div class='form-group col'>
+          <label for='firstName'>FirstName</label>
+          <input
+            type='text'
+            name='firstName'
+            id='firstName'
+            class='form-control'
+            {{#if userReg.firstName}} value ={{userReg.firstName}}  {{/if}}
+          />
+        </div>
+        <div class='form-group col'>
+          <label for='lastName'>LastName</label>
+          <input
+            type='text'
+            name='lastName'
+            id='lastName'
+            class='form-control'
+                {{#if userReg.lastName}} value ={{userReg.lastName}}  {{/if}}
+          />
+        </div>
+      </div>
+      <div class='form-group pt-2'>
+        <label for='email'>Email</label>
+        <input type='text' name='email' id='email' class='form-control' {{#if userReg.email}} value ={{userReg.email}}  {{/if}}/>
+          
+      </div>
+
+      <div class='row pt-2'>
+        <div class='form-group col'>
+          <label for='password'>Password</label>
+          <input
+            type='password'
+            name='password'
+            id='password'
+            class='form-control'
+              {{#if userReg.password}} value ={{userReg.password}}  {{/if}}
+          />
+        </div>
+        <div class='form-group col'>
+          <label for='confirmPassword'>Confirm Password</label>
+          <input
+            type='password'
+            name='confirmPassword'
+            id='confirmPassword'
+            class='form-control'
+              {{#if userReg.confirmPassword}} value ={{userReg.confirmPassword}}  {{/if}}
+          />
+        </div>
+        <button class='btn btn-primary mt-3' type='submit'>Register</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>

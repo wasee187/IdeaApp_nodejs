@@ -1,0 +1,43 @@
+<div class="container">
+    <form action="/ideas" method="POST" class="pb-3">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control mt-2" id="title" 
+
+            {{#if idea.title}}
+            value="{{idea.title}}"
+            {{/if}}>
+        </div>
+        <div class="form-group p-2">
+            <label for="description">Description</label>
+            <textarea name="description" class="form-control mt-2" id="description" rows="5">
+            {{#if idea.description}}
+            {{idea.description}}
+            {{/if}}
+            </textarea>
+        </div>
+      
+        <div class="form-group p-2">
+            <label for="status">Status</label>
+            <select name="status" id="status">
+                <option value="public" {{#if idea.status}} {{compareValues "public" idea.status 'select'}} {{/if}}>Public</option>
+                <option value="private" {{#if idea.status}} {{compareValues "public" idea.status 'select'}} {{/if}}>Private</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tags">Tags</label>
+            <input type="text" name="tags" class="form-control mt-2" id="tags" data-role='tagsinput' 
+            {{#if idea.tags}}
+            value="{{idea.tags}}"
+            {{/if}}>
+        </div>
+        <div class="form-check p-2">
+            <input type="checkbox" name="allowComments" class="form-check-input " id="allowComments"
+            {{#if idea.allowComments}}checked='true' {{/if}}>
+            <label for="allowComments" class="form-check-label">Allow Comments</label> 
+        </div>
+        <button disabled style="display: none;" type="submit">Add Idea</button>
+        <button class="btn btn-primary p-2" type="submit">Add Idea</button>
+    </form>
+</div>

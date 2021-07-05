@@ -1,0 +1,27 @@
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xm-6 px-3 py-3">
+                {{>_dashboard-panel-left}}
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xm-6 px-3 py-3">
+                
+                    <ul class="list-unstyled mb-3 profile">
+                    <li><strong>Profile Picture :</strong>Please click edit profile to upload picture</li>
+                    <li><strong>First Name      :</strong>{{user.firstName}}</li>
+                    <li><strong>Last Name       :</strong>{{user.lastName}}</li>
+                    <li><strong>Email           :</strong>{{user.email}}</li>
+                    <li><strong>Password        :</strong><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></li>
+                </ul>
+
+                <div class="d-flex justify-content-start px-2">
+                    <a href="/users/me/edit" class="btn btn-info">Edit profile</a>
+                    <form action="/users/me?_method=DELETE" method="POST">
+                        <button class="btn btn-danger mx-3">Delete Profile</button>
+                    </form>
+                </div>
+              
+            </div>
+        </div>
+    
+</div>
