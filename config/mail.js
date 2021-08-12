@@ -1,5 +1,5 @@
 const prodMailConfig = {
-  service: 'gmail',
+  service: 'Gmail',
   auth: {
     user: 'waseetech94@gmail.com',
     pass: 'w@see420',
