@@ -1,0 +1,35 @@
+.sticky-footer {
+  background-color: #2a2c2c;
+  color: white;
+  position: sticky;
+  top: 100%;
+  transition: 0.8s;
+  font-size: 15px;
+}
+.sticky-footer:hover {
+  background-color: rgb(8, 13, 19);
+}
+.footer-div {
+  max-width: 1200px;
+}
+.footer-icon i {
+  padding-left: 6px;
+}
+.fot-text {
+  font-family: 'Caveat', cursive;
+}
+.icon {
+  transition: transform 0.8s;
+}
+.icon:hover {
+  transform: scale(1.5);
+}
+.fa-facebook {
+  color: #4267b2;
+}
+.fa-github {
+  color: #4078c0;
+}
+.fa-instagram {
+  color: #8a3ab9;
+}

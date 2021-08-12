@@ -1,5 +1,5 @@
-<div class='container'>
-  <div class='card'>
+<div class='container '>
+  <div class='card comment-form'>
     <div class='card-header'>
       {{#if ideaDoc.title}}
         <h4>Add Comment {{ideaDoc.title}}</h4>
@@ -17,6 +17,7 @@
             placeholder='Title of your comment'
             {{#if comTitle}} value={{comTitle}}{{/if}}
           />
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
         </div>
         <div class='form-group'>
           <textarea
@@ -25,7 +26,8 @@
             placeholder='comments...'
           > {{#if comText}}{{comText}}{{/if}}</textarea>
         </div>
-        <input type='submit' class='btn btn-primary mt-2' value='Add Comment' />
+        <button type='submit' class="btn btn-primary mt-2">Add Comment</button>
+        {{!-- <input type='submit' class='btn btn-primary mt-2' value='Add Comment' /> --}}
       </form>
       {{#if ideaDoc.id}}
       <a href='/ideas/{{ideaDoc.id}}' class='btn btn-info mt-2'>Back to Idea</a>

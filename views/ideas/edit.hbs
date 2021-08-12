@@ -1,33 +1,57 @@
 
 <div class="container">
-    <form action="/ideas/{{idea._id}}?_method=PUT" method="POST">
-        <div class="form-group">
+    <h4 class="text-center m-3">Edit your post</h4>
+    <form action="/ideas/{{idea._id}}?_method=PUT&_csrf={{csrfToken}}" method="POST" enctype="multipart/form-data" class="m-3">
+        <div class="form-group m-2">
             <label for="title">Title</label>
-            <input type="text" name="title" class="form-control mt-2" id="title" value="{{idea.title}}">
+            <input type="text" name="title" class="form-control" id="title" value="{{idea.title}}">
         </div>
-        <div class="form-group p-2">
+        <div class="form-group m-2">
             <label for="description">Description</label>
             <textarea name="description" class="form-control mt-2" id="description" rows="5">{{idea.description}}</textarea>
         </div>
-      
-        <div class="form-group p-2">
+      <div class="form-group m-2">
+            <label for="ideaPic">Upload Featured Image to update existing one :</label>
+            <input type="file" name="ideaPic" class="form-control">
+        </div>
+
+        <div class="form-group m-2">
             <label for="status">Status</label>
             <select name="status" id="status">
                 <option value="public" {{compareValues "public" idea.status 'select'}}>Public</option>
                 <option value="private" {{compareValues "private" idea.status 'select'}}>Private</option>
             </select>
         </div>
-
-          <div class="form-group">
+        <div class="form-group m-2">
+            <label for="categories">Categories : </label>
+            {{#if idea.category}}
+                <select class="form-control custom-select" multiple name="categories" id="categories">
+                    {{#each idea.category}}
+                 
+                <option value="{{category}}" {{compareValues category categoryName 'select'}}>{{category}}</option>
+          
+                    {{/each}}
+                </select>
+            {{else}}
+                <select class="form-control custom-select" multiple name="categories" id="categories">
+                    {{#each ideaCategories}}
+                 
+                <option value="{{category}}" {{compareValues category categoryName 'select'}}>{{category}}</option>
+          
+                    {{/each}}
+                </select>
+            {{/if}}
+        </div>
+          <div class="form-group m-2">
             <label for="tags">Tags</label>
             <input type="text" name="tags" class="form-control mt-2" id="tags" data-role='tagsinput' value="{{idea.tags}}">
         </div>
 
-        <div class="form-check p-2">
+        <div class="form-check m-2">
             <input type="checkbox" name="allowComments" class="form-check-input" id="allowComments" {{#if idea.allowComments}} checked='true' {{/if}}>
             <label for="allowComments" class="form-check-label">Allow Comments</label> 
         </div>
         <button disabled style="display: none;" type="submit">Update Idea</button>
-        <button class="btn btn-primary p-2" type="submit">Update Idea</button>
+        <button class="btn btn-primary m-2" type="submit">Update Idea</button>
     </form>
 </div>

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 //requiring comment model
 const { Comment } = require('../models/comments');
+const Like = require('../models/likes');
 
 const ideaSchema = new mongoose.Schema(
   {
@@ -27,12 +28,18 @@ const ideaSchema = new mongoose.Schema(
         message: 'Please set public or private in status field',
       },
     },
+    categories: [
+      {
+        categoryName: String,
+      },
+    ],
     tags: [
       {
         type: String,
         required: [true, 'Idea must have at least one tag'],
       },
     ],
+    image: String,
     user: {
       id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -47,18 +54,34 @@ const ideaSchema = new mongoose.Schema(
   }
 );
 
-//virtual schema
+//virtual schema for comments
 ideaSchema.virtual('comments', {
   ref: 'Comment',
   localField: '_id',
   foreignField: 'idea',
 });
 
+//virtual schema for like
+ideaSchema.virtual('likes', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'idea',
+});
+
+ideaSchema.set('toObject', { virtuals: true });
+ideaSchema.set('toJSON', { virtuals: true });
+
 //deleting associate comment before removing idea
 ideaSchema.pre('remove', async function (next) {
   const idea = this;
   const id = idea._id;
+
+  //removing comment
   await Comment.deleteMany({
+    idea: id,
+  });
+  //removing all likes
+  await Like.deleteMany({
     idea: id,
   });
   next();

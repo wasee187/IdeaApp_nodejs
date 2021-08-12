@@ -1,0 +1,92 @@
+/* .profile li {
+  margin-bottom: 2em;
+}
+.profile li strong {
+  margin-right: 1em;
+} */
+.dash-panel-right {
+  background-color: #dadada67;
+  color: rgb(3, 3, 3);
+  box-shadow: 3px 5px #58565623;
+  border-radius: 10px;
+  transition: 0.8s;
+  max-width: 900px;
+}
+.dash-panel-right:hover {
+  background-color: #4444414b;
+}
+.profile-card {
+  background-color: #fff;
+  color: black;
+  box-shadow: 0px 1px 10px 1px #000;
+  border-radius: 10px;
+  transition: 0.8s;
+  max-width: 600px;
+  max-height: 600px;
+  display: inline-block;
+}
+.profile-card:hover {
+  background-color: rgb(212, 198, 198);
+}
+.upper-card-container {
+  height: 150px;
+  background-color: #00203fff;
+}
+.proPic {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.lower-card-container {
+  height: 250px;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  padding-top: 100px;
+}
+.lower-card-container:hover {
+  background-color: rgb(212, 198, 198);
+}
+.lower-card-container h3 p {
+  box-sizing: border-box;
+  line-height: 0.6;
+  font-weight: lighter;
+}
+.lower-card-container h3 {
+  color: rgb(7, 7, 7);
+  opacity: 0.6;
+  font-weight: bold;
+}
+.lower-card-container p {
+  color: rgb(0, 0, 0);
+  opacity: 0.6;
+}
+.btnProfEdit {
+  background-color: #00203fff !important;
+}
+.image-container {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transform: translate(220px, 100px);
+}
+@media only screen and (max-width: 750px) {
+  .image-container {
+    transform: translate(150px, 100px);
+  }
+}
+@media only screen and (max-width: 400px) {
+  .image-container {
+    transform: translate(100px, 100px);
+  }
+}
+@media only screen and (max-width: 300px) {
+  .image-container {
+    transform: translate(80px, 100px);
+  }
+}
+.image-container img {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}

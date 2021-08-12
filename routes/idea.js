@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
+//requiring multer
+const multer = require('multer');
+
 //import idea validators
 const addIdeaValidator = require('../validators/addIdeaValidator');
 const ideaValidators = require('../validators/ideaValidators');
 const updateIdeaValidator = require('../validators/updateIdeaValidator');
 
+//configuring multer
+const ideaPictureUploads = multer().single('ideaPic');
 //import controllers
 const {
   getIdeasController,
@@ -19,6 +24,7 @@ const {
 
 //requiring auth middleware
 const { isAuth, checkOwnership } = require('../middleware/authMiddleware');
+
 //Get all ideas route
 router.get('/', getIdeasController);
 
@@ -36,6 +42,7 @@ router.get('/:id/edit', isAuth, checkOwnership, getEditIdeaFormController);
 router.post(
   '/',
   isAuth,
+  ideaPictureUploads,
   ideaValidators(),
   addIdeaValidator,
   postAddIdeaController
@@ -46,6 +53,7 @@ router.put(
   '/:id',
   isAuth,
   checkOwnership,
+  ideaPictureUploads,
   ideaValidators(),
   updateIdeaValidator,
   putUpdateIdeaController

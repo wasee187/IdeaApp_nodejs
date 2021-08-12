@@ -34,7 +34,7 @@ const loginValidator = (req, res, next) => {
       title: 'Login',
       path: '/auth/login',
       errMsg: error.array()[0].msg,
-      user: {
+      reqUser: {
         email: req.body.email,
         password: req.body.password,
       },
@@ -68,4 +68,36 @@ const updateUserValidator = async (req, res, next) => {
     });
   }
 };
-module.exports = { addUserValidator, loginValidator, updateUserValidator };
+const forgetPassValidator = (req, res, next) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    res.render('auth/forget-password', {
+      title: 'Forget Password',
+      errMsg: error.array()[0].msg,
+      path: '/auth/login',
+    });
+  } else {
+    next();
+  }
+};
+
+const resetPassValidator = (req, res, next) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    res.render('auth/reset-password', {
+      title: 'Rest Password',
+      errMsg: error.array()[0].msg,
+      token: req.body.token,
+      email: req.body.email,
+    });
+  } else {
+    next();
+  }
+};
+module.exports = {
+  addUserValidator,
+  loginValidator,
+  updateUserValidator,
+  forgetPassValidator,
+  resetPassValidator,
+};

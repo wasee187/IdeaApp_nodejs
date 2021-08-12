@@ -5,16 +5,24 @@ const router = express.Router();
 const passport = require('passport');
 //require middleware
 const { ensureGuest } = require('../middleware/authMiddleware');
-
+const {
+  registerLimiter,
+  forgetPasswordLimiter,
+  loginLimiter,
+} = require('../middleware/limiter');
 //requiring validation
 const {
   userSchemaValidators,
   loginSchemaValidator,
+  forgetPassValidators,
+  resetPassValidators,
 } = require('../validators/userValidators');
 
 const {
   addUserValidator,
   loginValidator,
+  forgetPassValidator,
+  resetPassValidator,
 } = require('../validators/userValidator');
 
 //requiring controller
@@ -24,6 +32,11 @@ const {
   getLoginController,
   postLoginController,
   getLogoutController,
+  accountActivationController,
+  forgetPasswordFormController,
+  forgetPasswordController,
+  getResetPasswordController,
+  postResetPasswordController,
 } = require('../controller/authControllers');
 
 //route for register
@@ -34,6 +47,7 @@ router.post(
   '/register',
   userSchemaValidators(),
   addUserValidator,
+  registerLimiter,
   postRegisterController
 );
 
@@ -45,6 +59,7 @@ router.post(
   '/login',
   loginSchemaValidator(),
   loginValidator,
+  loginLimiter,
   passport.authenticate('local', {
     failureRedirect: '/auth/login',
     failureFlash: true,
@@ -67,9 +82,32 @@ router.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/login' }),
   (req, res, next) => {
-    console.log(req.user);
     res.redirect('/ideas');
   }
 );
 
+//activate account
+router.get('/activate/:token', accountActivationController);
+
+//forget password form route
+router.get('/forget-password', forgetPasswordFormController);
+
+//forget password post routes
+router.post(
+  '/forget-password',
+  forgetPassValidators(),
+  forgetPassValidator,
+  forgetPasswordLimiter,
+  forgetPasswordController
+);
+
+//reset password
+router.get('/reset-password/:token', getResetPasswordController);
+//rest password post request
+router.post(
+  '/reset-password',
+  resetPassValidators(),
+  resetPassValidator,
+  postResetPasswordController
+);
 module.exports = router;

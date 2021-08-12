@@ -1,24 +1,31 @@
 
 <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xm-6 px-3 py-3">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xm-6 mx-3 my-3">
                 {{>_dashboard-panel-left}}
             </div>
-            <div class="col-lg-9 col-md-8 col-sm-7 col-xm-6 px-3 py-3">
-                
-                    <ul class="list-unstyled mb-3 profile">
-                    <li><strong>Profile Picture :</strong>Please click edit profile to upload picture</li>
-                    <li><strong>First Name      :</strong>{{user.firstName}}</li>
-                    <li><strong>Last Name       :</strong>{{user.lastName}}</li>
-                    <li><strong>Email           :</strong>{{user.email}}</li>
-                    <li><strong>Password        :</strong><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></li>
-                </ul>
-
-                <div class="d-flex justify-content-start px-2">
-                    <a href="/users/me/edit" class="btn btn-info">Edit profile</a>
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xm-6 my-3 py-2 profile-card">
+                <div class="upper-card-container">
+                    <div class="image-container">
+                         {{#if user.imageURL}}
+                        <img src="{{user.imageURL}}" alt="{{user.firstName}} Image" class="proPic ">
+                    {{else if user.image}}
+                        <img src="/users/{{user.image}}" alt="{{user.firstName}} Image" class="proPic ">
+                    {{else}}
+                        <img src="/users/userpic.png" alt="{{user.firstName}} Image" class="proPic ">
+                      {{/if}}
+                    </div>
+                </div>
+                <div class="lower-card-container text-center"> 
+                    <h3>{{user.firstName}} {{user.lastName}}</h3>
+                    <p>{{user.email}}</p>
+                    <div class="d-flex justify-content-center px-2">
+                    <a href="/users/me/edit" class="btn btn-success btnProfEdit">Edit profile</a>
                     <form action="/users/me?_method=DELETE" method="POST">
-                        <button class="btn btn-danger mx-3">Delete Profile</button>
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                        <button class="btn btn-danger mx-3 btnProfDelete">Delete Profile</button>
                     </form>
+                    </div>
                 </div>
               
             </div>

@@ -1,43 +1,63 @@
-<div class="container">
-    <form action="/ideas" method="POST" class="pb-3">
+<div class="container addIdea-form">
+    <form action="/ideas?_csrf={{csrfToken}}" method="POST" class="pb-3" enctype="multipart/form-data">
+        <h4 class="text-center py-2">Add Idea</h4>
         <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">Title :</label>
             <input type="text" name="title" class="form-control mt-2" id="title" 
 
             {{#if idea.title}}
             value="{{idea.title}}"
             {{/if}}>
         </div>
-        <div class="form-group p-2">
-            <label for="description">Description</label>
+        <div class="form-group my-2">
+            <label for="description">Description :</label>
             <textarea name="description" class="form-control mt-2" id="description" rows="5">
             {{#if idea.description}}
             {{idea.description}}
             {{/if}}
             </textarea>
         </div>
-      
-        <div class="form-group p-2">
-            <label for="status">Status</label>
-            <select name="status" id="status">
+        <div class="form-group my-2">
+            <label for="ideaPic">Featured Idea Image :</label>
+            <input type="file" name="ideaPic" class="form-control">
+        </div>
+        <div class="form-group my-2">
+            <label for="status">Status :</label>
+            <select class="form-control custom-select" name="status" id="status">
                 <option value="public" {{#if idea.status}} {{compareValues "public" idea.status 'select'}} {{/if}}>Public</option>
                 <option value="private" {{#if idea.status}} {{compareValues "public" idea.status 'select'}} {{/if}}>Private</option>
             </select>
         </div>
 
+        <div class="form-group my-2">
+            <label for="categories">Categories : </label>
+            {{#if idea.category}}
+            <select class="form-control custom-select" multiple name="categories" id="categories">
+            {{#each idea.category}}
+                <option value="{{category}}" {{compareValues category categoryName 'select'}}>{{category}}</option>
+            {{/each}}
+            </select>
+            {{else}}
+             <select class="form-control custom-select" multiple name="categories" id="categories">
+                {{#each category}}
+                    <option value="{{categoryName}}">{{categoryName}}</option>
+                {{/each}}
+            </select>
+            {{/if}}
+        </div>
         <div class="form-group">
-            <label for="tags">Tags</label>
+            <label for="tags">Tags : </label>
             <input type="text" name="tags" class="form-control mt-2" id="tags" data-role='tagsinput' 
             {{#if idea.tags}}
             value="{{idea.tags}}"
             {{/if}}>
         </div>
-        <div class="form-check p-2">
+        <div class="form-check my-2">
             <input type="checkbox" name="allowComments" class="form-check-input " id="allowComments"
             {{#if idea.allowComments}}checked='true' {{/if}}>
             <label for="allowComments" class="form-check-label">Allow Comments</label> 
         </div>
         <button disabled style="display: none;" type="submit">Add Idea</button>
-        <button class="btn btn-primary p-2" type="submit">Add Idea</button>
+        <button class="btn btn-primary my-2 " type="submit">Add New Idea</button>
     </form>
 </div>

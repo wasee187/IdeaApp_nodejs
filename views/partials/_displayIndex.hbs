@@ -1,0 +1,21 @@
+{{#each ideas}}
+
+  <div class='card idea-card mb-3'>
+    {{#if image}}
+      {{!-- <img class='card-img-top' src='{{image}}' alt='{{title}}' /> --}}
+      <img src='/ideas/{{image}}' alt='{{title}}' class='card-img-top' />
+    {{else}}
+      <img class='card-img-top' src='/ideas/default.jpg' alt='{{title}}' />
+    {{/if}}
+    <div class='card-body'>
+      <h5 class='card-title'>{{title}}</h5>
+      <div class='card-text'>{{{truncateContent description 60}}}</div>
+      <a href='/ideas/{{_id}}' class='btn btn-sm btn-primary'>Read More</a>
+    </div>
+  </div>
+
+{{else}}
+  <div class='mt-4'>
+    <h5 class='text-center'>No Idea Found</h5>
+  </div>
+{{/each}}

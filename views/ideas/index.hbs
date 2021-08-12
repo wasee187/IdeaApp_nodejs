@@ -1,43 +1,110 @@
-{{#if userRef}}
-  <h3 class='text-center'>All Ideas by <strong>{{firstName}}</strong></h3>
-  {{#each ideas}}
-    <div class='container'>
-      <div class='card'>
-        <div class='card-body'>
-          <h5 class='card-title'>{{title}}</h5>
-          <div class='card-text'>{{{truncateContent description 50}}}</div>
-          <div class='mt-2 mb-2'>
-            <em> <small class='text-muted'> Tags: </small></em>
-            {{#each tags}}
-              <span class='badge bg-info'>{{this}}</span>
-            {{/each}}
-          </div>
-          <a href='/ideas/{{_id}}' class='btn btn-sm btn-primary'>Read More</a>
-        </div>
-      </div>
 
+
+<div class='container my-3'>
+  <div class="row">
+  <div class="col-lg-9 col-md-7 col-sm-12">
+   {{#if userRef}}
+      <h3 class='text-center mb-3'>All Ideas by <strong>{{firstName}}</strong></h3>
+      {{>_displayIndex}}
+      <ul class="pagination justify-content-center mt-4">
+
+        {{#if (compareValues currentPage 1 'neq')}}
+        {{#if (compareValues previousPage 1 'neq')}}
+          <li class="page-item "><a class="page-link" href="/users/{{id}}/ideas?page=1">1</a></li>
+        {{/if}}
+        {{/if}}
+
+        {{#if hasPreviousPage}}
+          <li class="page-item "><a class="page-link" href="/users/{{id}}/ideas?page={{previousPage}}">{{previousPage}}</a></li>
+        {{/if}}
+
+        <li class="page-item active"><a class="page-link" href="/users/{{id}}/ideas?page={{currentPage}}">{{currentPage}}</a></li>
+
+        {{#if hasNextPage}}
+          <li class="page-item"><a class="page-link" href="/users/{{id}}/ideas?page={{nextPage}}">{{nextPage}}</a></li>
+        {{/if}}
+
+        {{#if lastPage}}
+        {{#if (compareValues lastPage currentPage 'neq')}}
+        {{#if (compareValues lastPage nextPage 'neq')}}
+          <li class="page-item"><a class="page-link" href="/users/{{id}}/ideas?page={{lastPage}}">{{lastPage}}</a></li>
+        {{/if}}
+        {{/if}}
+        {{/if}}
+      </ul>
+    {{else if catRef}}
+      <h3 class='text-center mb-3'>All Ideas under <strong>{{categoryName}}</strong>category</h3>
+      {{>_displayIndex}}
+      <ul class="pagination justify-content-center mt-4">
+
+        {{#if (compareValues currentPage 1 'neq')}}
+        {{#if (compareValues previousPage 1 'neq')}}
+          <li class="page-item "><a class="page-link" href="/categories/{{categoryName}}/ideas?page=1">1</a></li>
+        {{/if}}
+        {{/if}}
+
+        {{#if hasPreviousPage}}
+         <li class="page-item "><a class="page-link" href="/categories/{{categoryName}}/ideas?page={{previousPage}}">{{previousPage}}</a></li>
+        {{/if}}
+
+        <li class="page-item active"><a class="page-link" href="/categories/{{categoryName}}/ideas?page={{currentPage}}">{{currentPage}}</a></li>
+
+        {{#if hasNextPage}}
+          <li class="page-item"><a class="page-link" href="/categories/{{categoryName}}/ideas?page={{nextPage}}">{{nextPage}}</a></li>
+        {{/if}}
+        {{#if lastPage}}
+        {{#if (compareValues lastPage currentPage 'neq')}}
+        {{#if (compareValues lastPage nextPage 'neq')}}
+          <li class="page-item"><a class="page-link" href="/categories/{{categoryName}}/ideas?page={{lastPage}}">{{lastPage}}</a></li>
+        {{/if}}
+        {{/if}}
+        {{/if}}
+      </ul>
+    {{else}}
+
+      {{>_displayIndex}}
+      <ul class="pagination justify-content-center mt-4">
+
+      {{#if (compareValues currentPage 1 'neq')}}
+      {{#if (compareValues previousPage 1 'neq')}}
+        <li class="page-item "><a class="page-link" href="/ideas?page=1">1</a></li>
+      {{/if}}
+      {{/if}}
+
+      {{#if hasPreviousPage}}
+        <li class="page-item "><a class="page-link" href="/ideas?page={{previousPage}}">{{previousPage}}</a></li>
+      {{/if}}
+
+     <li class="page-item active"><a class="page-link" href="/ideas?page={{currentPage}}">{{currentPage}}</a></li>
+
+      {{#if hasNextPage}}
+        <li class="page-item"><a class="page-link" href="/ideas?page={{nextPage}}">{{nextPage}}</a></li>
+      {{/if}}
+      {{#if lastPage}}
+      {{#if (compareValues lastPage currentPage 'neq')}}
+      {{#if (compareValues lastPage nextPage 'neq')}}
+        <li class="page-item"><a class="page-link" href="/ideas?page={{lastPage}}">{{lastPage}}</a></li>
+      {{/if}}
+      {{/if}}
+      {{/if}}
+    </ul>
+    {{/if}}
+  </div>
+  <div class=" col-lg-3 col-md-5 col-sm-12 cat-col">
+      <h2>Categories </h2>
+      <hr>
+      {{#each categories}}
+      <span class="badge bg-info"><a href="/categories/{{categoryName}}/ideas">{{categoryName}}</a></span> 
+      {{/each}}
+      <hr>
+      <h2>Tags </h2>
+      <hr>
+      {{#each ideasTags}}
+      {{#each tags}}
+      <span class="badge bg-info mb-3">{{this}}</a></span> 
+      {{/each}}
+      {{/each}}
     </div>
+  </div>
+</div>
 
-  {{/each}}
-
-{{else}}
-  {{#each ideas}}
-    <div class='container'>
-      <div class='card'>
-        <div class='card-body'>
-          <h5 class='card-title'>{{title}}</h5>
-          <div class='card-text'>{{{truncateContent description 50}}}</div>
-          <div class='mt-2 mb-2'>
-            <em> <small class='text-muted'> Tags: </small></em>
-            {{#each tags}}
-              <span class='badge bg-info'>{{this}}</span>
-            {{/each}}
-          </div>
-          <a href='/ideas/{{_id}}' class='btn btn-sm btn-primary'>Read More</a>
-        </div>
-      </div>
-
-    </div>
-
-  {{/each}}
-{{/if}}

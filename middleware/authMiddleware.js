@@ -57,4 +57,19 @@ const ensureGuest = (req, res, next) => {
     next();
   }
 };
-module.exports = { isAuth, checkOwnership, checkCommentOwner, ensureGuest };
+
+const ensureAdmin = (req, res, next) => {
+  if (req.user.role === 1) {
+    next();
+  } else {
+    req.flash('error_msg', 'You do not have permission to perform this action');
+    res.redirect('back');
+  }
+};
+module.exports = {
+  isAuth,
+  checkOwnership,
+  checkCommentOwner,
+  ensureGuest,
+  ensureAdmin,
+};

@@ -1,0 +1,20 @@
+.fot-icon,
+.navbar-brand {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px !important;
+}
+
+.nav-bar {
+  background-color: #2a2c2c !important;
+  transition: 0.8s;
+}
+.nav-bar:hover {
+  background-color: rgb(2, 13, 24) !important;
+}
+.navbar ul li a {
+  transition: 0.8s linear;
+}
+.navbar ul li a:hover {
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 5px;
+}

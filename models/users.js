@@ -5,6 +5,11 @@ const bcrypt = require('bcryptjs');
 //requiring idea model
 const Idea = require('../models/ideas');
 const { Comment } = require('../models/comments');
+const Like = require('../models/likes');
+//requiring file system
+const fs = require('fs');
+const util = require('util');
+const deleteUploadFile = util.promisify(fs.unlink);
 
 const userSchema = new mongoose.Schema({
   googleID: {
@@ -49,11 +54,24 @@ const userSchema = new mongoose.Schema({
       },
     },
   },
+  image: String,
+  imageURL: String,
+  role: {
+    type: Number,
+    default: 0,
+  },
+  resetPasswordToken: String,
 });
 
-//virtual schema
+//virtual schema idea
 userSchema.virtual('ideas', {
   ref: 'Idea',
+  localField: '_id',
+  foreignField: 'user.id',
+});
+//virtual schema for like
+userSchema.virtual('likes', {
+  ref: 'Like',
   localField: '_id',
   foreignField: 'user.id',
 });
@@ -76,9 +94,19 @@ userSchema.pre('save', async function (next) {
 userSchema.pre('remove', async function (next) {
   const user = this;
   const id = user._id;
+
+  const ideas = await Idea.find({ 'user.id': id });
+  ideas.map((idea) => {
+    if (idea.image) {
+      deleteUploadFile(`./uploads/ideas/${idea.image}`);
+    }
+  });
   //removing all idea of user
   await Idea.deleteMany({
     'user.id': id,
+  });
+  await Like.deleteMany({
+    user: id,
   });
   await Comment.deleteMany({
     'user.id': id,

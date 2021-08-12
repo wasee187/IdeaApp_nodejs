@@ -24,6 +24,36 @@ const ideaValidators = () => {
       .trim()
       .isLength({ min: 1 })
       .withMessage('Idea must have at least one tag'),
+    check('categories').notEmpty().withMessage('Categories is required'),
+    check('ideaPic').custom((value, { req }) => {
+      const { file } = req;
+      if (file) {
+        if (
+          file.mimetype === 'image/jpeg' ||
+          file.mimetype === 'image/jpg' ||
+          file.mimetype === 'image/png'
+        ) {
+          return true;
+        } else {
+          throw new Error('Please select an image file');
+        }
+      } else {
+        return true;
+      }
+    }),
+    check('ideaPic').custom((value, { req }) => {
+      const { file } = req;
+      if (file) {
+        //checking if file size is greater than 5 mb
+        if (file.size > 5242880) {
+          throw new Error('Image file must be less than 5 MB');
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    }),
   ];
 };
 

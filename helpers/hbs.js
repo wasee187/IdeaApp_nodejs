@@ -12,6 +12,9 @@ const compareValues = (value1, value2, value3) => {
     case 'btn':
       return value1.equals(value2) ? 'block' : 'none';
       break;
+    case 'neq':
+      return value1 != value2;
+      break;
     default:
   }
 };
@@ -31,6 +34,7 @@ const formatDate = (date, reqFormat) => {
 const checkArthur = (lValue, rValue, fName, lName) => {
   return lValue.equals(rValue) ? 'You' : fName + ' ' + lName;
 };
+const formatYear = 
 module.exports = {
   compareValues,
   truncateContent,

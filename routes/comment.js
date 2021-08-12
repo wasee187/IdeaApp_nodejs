@@ -7,15 +7,17 @@ const {
   addCommentController,
   postCommentController,
   deleteCommentController,
+  getCommentCountController,
 } = require('../controller/commentController');
 
 //requiring comments validator
 const commentValidators = require('../validators/commentValidators');
 const commentValidator = require('../validators/commentValidator');
 
+//get comment count
+router.get('/count', getCommentCountController);
 //get comment form router
 router.get('/new', isAuth, addCommentController);
-
 //post comment
 router.post(
   '/',

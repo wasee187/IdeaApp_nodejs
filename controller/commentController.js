@@ -90,8 +90,28 @@ const deleteCommentController = async (req, res) => {
     });
   }
 };
+
+//get Comment Count Controller
+
+const getCommentCountController = async (req, res) => {
+  const ideaId = req.params.id;
+  try {
+    const idea = await Idea.findById(ideaId).populate('comments');
+    if (idea) {
+      const count = idea.comments.length;
+      res.status(200).send({ success: true, count });
+    } else {
+      res.status(500).send({ success: false, message: 'Idea is not found' });
+    }
+  } catch (err) {
+    res.status(500).render('pages/error', {
+      title: 'Error',
+    });
+  }
+};
 module.exports = {
   addCommentController,
   postCommentController,
   deleteCommentController,
+  getCommentCountController,
 };

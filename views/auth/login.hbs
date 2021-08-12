@@ -1,26 +1,33 @@
-<div class='row'>
-  <div class='col-lg-4 col-lg-6 col-sm-12 offset-lg-2'>
-    <h1 class='pb-2 mt-2 text-muted'>Login</h1>
+<div class='container-fluid login-form py-3'>
+  <div class='row'>
+  <div class='col-lg-4 col-md-6 col-sm-12 offset-lg-3 offset-md-2'>
+    <h1 class='pb-2 mt-2 text-muted text-center'>Login</h1>
     <form action='/auth/login' method='POST'>
       <div class='form-group'>
-        <label for='email'>Email </label>
-        <input type='text' name='email' id='email' class='form-control' 
-          {{#if user.email}} value={{user.email}} {{/if}}
+        <label for='email'>Email :</label>
+        <input type='text' name='email' id='email' class='form-control mt-2' 
+          {{#if reqUser.email}} value={{reqUser.email}} {{/if}}
         />
       </div>
       <div class='form-group pt-2'>
-        <label for='password'>Password </label>
+        <label for='password'>Password :</label>
         <input
           type='password'
           name='password'
           id='password'
-          class='form-control'
-          {{#if user.password}} value={{user.password}} {{/if}}
+          class='form-control mt-2'
+          {{#if reqUser.password}} value={{reqUser.password}} {{/if}}
         />
       </div>
-      <button class='btn btn-primary mt-3' type='submit'>Login</button>
+       <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="d-flex justify-content-center">
+        <button class='btn btn-block btn-primary mx-2 my-2' type='submit'>Login</button>
+        <a href="/auth/google" class="btn btn-success btn-block mx-2 my-2">Login With Google</a>
+      </div>
     </form>
-    <a href="/auth/google" class="btn btn-warning btn-block mt-2">Login with google</a>
+     <a href="/auth/forget-password" class="d-flex justify-content-center my-2">Forget Password</a>
   </div>
+
+</div>
 
 </div>

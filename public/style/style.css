@@ -1,5 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  /* width: 100vw; */
+  background-color: #ffffff;
+}
+
 .ck-editor__editable {
   min-height: 200px;
+  border-radius: 10px !important;
 }
 .bootstrap-tagsinput {
   background-color: #fff;
@@ -68,11 +80,9 @@
   font-size: 13px;
   cursor: pointer;
   border-radius: 15px;
+  align-items: center;
+  transition: transform 0.5s;
 }
-
-.profile li {
-  margin-bottom: 2em;
-}
-.profile li strong {
-  margin-right: 1em;
+.btn:hover {
+  transform: scale(1.1);
 }

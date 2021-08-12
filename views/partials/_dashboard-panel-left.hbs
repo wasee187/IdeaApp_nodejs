@@ -1,20 +1,48 @@
-<div class='list-group'>
-  <a
-    href='/users/me/ideas'
-    class='list-group-item list-group-item-action
-      {{compareValues '/users/me/ideas' path 'path'}}'
-    aria-current='true'
-  >
-    All Ideas
-  </a>
-  <a
-    href='/users/me'
-    class='list-group-item list-group-item-action
-      {{compareValues '/users/me' path 'path'}}'
-  >Profile</a>
-  <a
-    href='/auth/logout'
-    class='list-group-item list-group-item-action
-      {{compareValues '/auth/logout' path 'path'}}'
-  >Logout</a>
-</div>
+{{#if isAdmin}}
+  <div class='list-group'>
+    <a
+      href='/users/me/ideas'
+      class='list-group-item list-group-item-action
+        {{compareValues '/users/me/ideas' path 'path'}}'
+      aria-current='true'
+    >
+      All Ideas
+    </a>
+    <a
+      href='/users/me'
+      class='list-group-item list-group-item-action
+        {{compareValues '/users/me' path 'path'}}'
+    >Profile</a>
+    <a
+      href='/categories/new'
+      class='list-group-item list-group-item-action
+        {{compareValues '/categories' path 'path'}}'
+    >Categories</a>
+    <a
+      href='/auth/logout'
+      class='list-group-item list-group-item-action
+        {{compareValues '/auth/logout' path 'path'}}'
+    >Logout</a>
+  </div>
+{{else}}
+  <div class='list-group'>
+    <a
+      href='/users/me/ideas'
+      class='list-group-item list-group-item-action
+        {{compareValues '/users/me/ideas' path 'path'}}'
+      aria-current='true'
+    >
+      All Ideas
+    </a>
+    <a
+      href='/users/me'
+      class='list-group-item list-group-item-action
+        {{compareValues '/users/me' path 'path'}}'
+    >Profile</a>
+    <a
+      href='/auth/logout'
+      class='list-group-item list-group-item-action
+        {{compareValues '/auth/logout' path 'path'}}'
+    >Logout</a>
+  </div>
+{{/if}}

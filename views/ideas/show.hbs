@@ -1,19 +1,37 @@
 <div class="container">
-  <div class="card p-4 mt-2">
-    <div class="card-body">
-      <h5 class="card-title">{{idea.title}}</h5>
+  <div class="card p-4 mt-2 card-idea">
+    <div class="card-body idea">
+      <h2 class="card-title display-4">
+        {{idea.title}}
+        {{#if idea.image}}
+          <img src="{{idea.image}}" alt="{{idea.title}}" class="img">
+        {{else}}
+          <img src="/ideas/default.jpg" alt="{{idea.title}}">
+        {{/if}}
+        </h2>
       <div class="card-text">{{{idea.description}}}</div>
+      <div class="likeCom">
+        <a href="/likes" data-id="{{user_id}}" data-name="{{idea._id}}"><i class="far fa-thumbs-up"></i></a>
+        <span class="like-count "  data-name="{{idea._id}}"></span>
+        <a href="/ideas/{{idea._id}}/comments/new"><i class="fas fa-comments "></i></a>
+        <span class="comment-count "  data-name="{{idea._id}}"></span>
+      </div>
         <div class="mt-2 mb-2 d-flex justify-content-between">
           <div>
-            <em> <small class='text-muted'> Tags: </small></em>
+            <em> <small > Tags: </small></em>
             {{#each idea.tags}}
               <span class="badge bg-info">{{this}}</span> 
             {{/each}}
           </div>
-
           <div>
-            <span >Arthur: <strong><a href="/users/{{idea.user.id}}/ideas">{{checkArthur idea.user.id user_id idea.user.firstName idea.user.lastName}}</a></strong></span>
-            <p class="text-muted">Date: {{formatDate idea.createdAt 'dd/MM/yy'}}</p>
+            <small><strong >Category :</strong></small>
+            {{#each idea.category}}
+              <span class="badge bg-info"><a href="/categories/{{categoryName}}/ideas">{{categoryName}}</a></span> 
+            {{/each}}
+          </div>
+          <div>
+            <span >Arthur: <strong><a class="arthur-name" href="/users/{{idea.user.id}}/ideas">{{checkArthur idea.user.id user_id idea.user.firstName idea.user.lastName}}</a></strong></span>
+            <p>Date: {{formatDate idea.createdAt 'dd/MM/yy'}}</p>
           </div>
         </div>
 
@@ -32,8 +50,8 @@
   </div>
     {{#if user}}
       {{#if idea.allowComments}}
-        <div class="card p-2">
-            <a href="/ideas/{{idea._id}}/comments/new" class="btn btn-info">Add Comment</a>
+        <div class="card p-2 card-comment">
+            <a href="/ideas/{{idea._id}}/comments/new" class="btn btn-danger">Add Comment</a>
           <div class="card-body">
             {{#each idea.comments}}
               <div class="d-flex justify-content-between">
@@ -44,12 +62,13 @@
                   <p class="card-text">{{text}}</p>
                   <div style="display: {{compareValues user.id ../user_id 'btn'}};">
                     <form action="/ideas/{{../idea._id}}/comments/{{_id}}?_method=DELETE" method="POST">
+                      <input type="hidden" name="_csrf" value="{{csrfToken}}">
                       <button class= "btn btn-danger btn-sm">Delete</button>
                     </form>
                   </div>
                 </div>
                 <div>
-                  <em class="text-muted">~{{user.firstName}} {{user.lastName}}</em>
+                  <em >~{{user.firstName}} {{user.lastName}}</em>
                   <p>{{formatDate createdAt 'dd/MM/yy'}}</p>
                 </div>
               </div>

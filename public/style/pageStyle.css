@@ -1,0 +1,28 @@
+.jumbotron {
+  background-image: url('/backgrounds/ideaIndex3.jpg');
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  border-radius: 0px !important;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+}
+.jumbotron p {
+  font-family: 'MonteCarlo', cursive;
+  font-size: 30px;
+  padding-left: 20px;
+  line-height: 2;
+}
+.jumboBTN {
+  padding-left: 20px;
+}
+.btn-learn {
+  background-color: rgb(87, 87, 2) !important;
+  color: white;
+}
+.btn-signUp {
+  background-color: rgba(245, 28, 28, 0.678) !important;
+  color: white;
+}
