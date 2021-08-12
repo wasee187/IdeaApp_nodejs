@@ -68,11 +68,11 @@ const googleStrategy = (passport) => {
           };
           const foundUser = await User.findOne({ googleID: profile.id });
           if (foundUser) {
-            next(null, foundUser);
+            return next(null, foundUser);
           } else {
             const user = new User(profileToSave);
             await user.save({ validateBeforeSave: false });
-            next(null, user);
+            return next(null, user);
           }
         } catch (err) {
           next(err);
