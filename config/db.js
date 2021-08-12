@@ -4,7 +4,7 @@ let url;
 if (process.env.NODE_ENV === 'development') {
   url = process.env.LOCAL_DB;
 } else if (process.env.NODE_ENV === 'production') {
-  url = CLOUD_DB;
+  url = process.env.CLOUD_DB;
 }
 //database connection
 const connectDB = async function () {
